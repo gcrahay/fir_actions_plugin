@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load add_css_class %}
+{% block custom_css %}{{form.media.css}}{% endblock%}
+
+{% block custom_js %}
+{{form.media.js}}
+    <script src="/static/select/select2.min.js"></script>
+    <script language="JavaScript">
+        $(document).ready(function() {
+            //$('#id_where').select2();
+			function newParameters(query) {
+            query.location = $('#id_where').val();
+        }
+        $('#id_how_0').djselectable('option', 'prepareQuery', newParameters);
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<form action="{% url 'actions:blocks_index' %}" method='post' id='search'>
+			<div class='form-group col-md-4'>
+				<label for="id_where" class="control-label">{% trans "Where" %}</label>
+				<div class='controls'>
+				  {{ form.where|add_css_class:'form-control' }}
+				</div>
+			  </div>
+			<div class='form-group col-md-1'>
+				<label for="id_how" class="control-label">{% trans "How" %}</label>
+				<div class='controls'>
+				  {{ form.how|add_css_class:'form-control' }}
+				</div>
+			  </div>
+			<div class="col-md-1">
+				{% csrf_token %}
+				<label></label>
+				<div class='controls'>
+					<button class="btn btn-primary" type="submit">{% trans "Filter" context "verb" %}</button>
+				</div>
+			</div>
+		</form>
+    </div>
+		{% include 'fir_actions/blocks_list.html' with blocks=blocks %}
+{%endblock%}

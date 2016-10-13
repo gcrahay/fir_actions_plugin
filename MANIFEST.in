@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+recursive-include fir_actions/templates *
+recursive-include fir_actions/locale *
+recursive-include fir_actions/static *
+recursive-exclude * *.pyc
+recursive-exclude * *~

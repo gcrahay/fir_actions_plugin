@@ -1,0 +1,56 @@
+{% load add_css_class %}
+{% load i18n %}
+{% load markdown %}
+
+<div id="addAction" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addActionLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		  	<div class="modal-header">
+		    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 id="addActionLabel" class="modal-title">{% trans "Add action" %}</h4>
+		  	</div>
+            <form id="action_form" action="{% url 'actions:actions_add' event_id %}" method="POST">
+			  	<div class="modal-body">
+					{% csrf_token %}
+
+					<div id="type_control_group" class='form-group {% if action_form.type.errors%} error{%endif%}'>
+									<label for="id_type" class="control-label name-label">{% trans "Type" %}</label>
+									<div class='controls'>
+										{{ action_form.type|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in action_form.type.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+
+							<div id="subject_control_group" class='form-group {% if action_form.subject.errors%} error{%endif%}'>
+									<label for="id_subject" class="control-label value-label">{% trans "Subject" %}</label>
+									<div class='controls'>
+										{{ action_form.subject|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in action_form.how.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+							<div id="what_control_group" class='form-group {% if action_form.description.errors%} error{%endif%}'>
+									<label for="id_description" class="control-label value-label">{% trans "Description" %}</label>
+									<div class='controls'>
+										{% rich_edit action_form.description %}
+										<span class='help-block'>{% for error in action_form.description.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+					        <div id="comment_control_group" class='form-group {% if action_form.business_line.errors%} error{%endif%}'>
+									<label for="id_business_line" class="control-label value-label">{% trans "Business line" %}</label>
+									<div class='controls'>
+										{{ action_form.business_line|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in action_form.business_line.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+			  	</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" type="button">{% trans "Cancel" %}</button>
+					<button class="btn btn-primary" id='submit-action' type="submit">{% trans "Add action" %}</button>
+			  </div>
+		  </form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(function() {$('#id_description').markdown()});
+</script>

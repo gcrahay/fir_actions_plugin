@@ -1,0 +1,4 @@
+{% load i18n %}
+{% if perms.fir_blocks %}
+<li id='blocks-nav'><a href="{% url 'actions:blocks_index' %}">{% trans "Blocks" %}</a></li>
+{% endif %}

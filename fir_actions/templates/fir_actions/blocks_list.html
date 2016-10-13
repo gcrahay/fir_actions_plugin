@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load markdown %}
+<table class='table table-hover table-condensed'>
+    <thead>
+        <tr>
+            <th>{%  trans "Where" %}</th>
+            <th>{%  trans "How" %}</th>
+            <th>{%  trans "What" %}</th>
+            <th>{%  trans "Status" %}</th>
+            <th>{%  trans "State" %}</th>
+            <th></th>
+         </tr>
+    </thead>
+    <tbody>
+{% for b in blocks %}
+		<tr id='block_{{b.id}}' {%if b.comment%}data-toggle="collapse" data-target="#comment_{{b.id}}"{%endif%}>
+		    <td class=''><span>{{b.where}}</span></td>
+			<td class=''>{{b.how}}</td>
+			<td class=''>{{b.what}}</td>
+            <td class=''>{{b.status}}</td>
+            <td class=''>{{b.get_state_display}}</td>
+            <td>
+                {% for t in b.get_available_state_transitions %}
+                  <a  href="{%if event_id%}{% url 'actions:blocks_transition' b.id t.name event_id %}{%else%}{% url 'actions:blocks_transition' b.id t.name %}{%endif%}" title="{{t.custom.verbose}}">
+                      {% if t.target == 'approved' %}
+                        <span class='glyphicon glyphicon-thumbs-up'></span>
+                      {% elif t.target == 'refused' %}
+                        <span class='glyphicon glyphicon-thumbs-down'></span>
+                      {% elif t.target == 'enforced' %}
+                        <span class='glyphicon glyphicon-wrench'></span>
+                      {% elif t.target == 'deletion_proposed' %}
+                        <span class='glyphicon glyphicon-screenshot'></span>
+                      {% elif t.target == 'deletion_approved' %}
+                        <span class='glyphicon glyphicon-remove-sign'></span>
+                      {% elif t.target == 'deleted' %}
+                        <span class='glyphicon glyphicon-trash'></span>
+                      {% elif t.target == 'proposed' %}
+                        <span class='glyphicon glyphicon-asterisk'></span>
+                      {% elif t.target == 'blocked' %}
+                        <span class='glyphicon glyphicon-ban-circle'></span>
+                      {% endif %}
+                  </a>&nbsp;
+                {% endfor %}
+            </td>
+        </tr>
+        {%if b.comment%}
+        <tr class="collapse" id="comment_{{b.id}}"><td colspan="6">{{b.comment|markdown}}</td></tr>
+        {% endif %}
+{% endfor %}
+    </tbody>
+</table>

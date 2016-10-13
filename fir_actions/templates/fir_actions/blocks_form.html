@@ -1,0 +1,91 @@
+{% load add_css_class %}
+{% load i18n %}
+{% load markdown %}
+{% block custom_css %}{{block_form.media.css}}{% endblock%}
+{% block custom_js %}{{block_form.media.js}}{% endblock%}
+{{block_form.media.css}}
+{{block_form.media.js}}
+<script type="text/javascript">
+	$.ui.djselectable.prototype._comboButtonTemplate = function (input) {
+        var icon = $("<i>").addClass("glyphicon glyphicon-plus");
+        // Remove current classes on the text input
+        $(input).attr("class", "");
+        // Wrap with input-append
+        $(input).wrap('<div class="input-append" />');
+        // Return button link with the chosen icon
+        return $("<a>").append(icon).addClass("btn btn-small");
+    };
+    $(document).ready(function() {
+		$.ui.djselectable.prototype._comboButtonTemplate = function (input) {
+        var icon = $("<i>").addClass("glyphicon glyphicon-plus");
+        // Remove current classes on the text input
+        $(input).attr("class", "");
+        // Wrap with input-append
+        $(input).wrap('<div class="input-append" />');
+        // Return button link with the chosen icon
+        return $("<a>").append(icon).addClass("btn btn-small");
+    };
+    $.ui.djselectable.prototype._removeButtonTemplate = function (item) {
+        var icon = $("<i>").addClass("icon-remove-sign");
+        // Return button link with the chosen icon
+        return $("<a>").append(icon).addClass("btn btn-small pull-right");
+    };
+        function newParameters(query) {
+            query.location = $('#id_where').val();
+        }
+        $('#id_how_0').djselectable('option', 'prepareQuery', newParameters);
+    });
+</script>
+
+<div id="addBlock" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addBlockLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		  	<div class="modal-header">
+		    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 id="addBlockLabel" class="modal-title">{% trans "Add block" %}</h4>
+		  	</div>
+            <form id="block_form" action="{% url 'actions:blocks_add' event_id %}" method="POST">
+			  	<div class="modal-body">
+					{% csrf_token %}
+
+					<div id="where_control_group" class='form-group {% if block_form.where.errors%} error{%endif%}'>
+									<label for="id_where" class="control-label name-label">{% trans "Where" %}</label>
+									<div class='controls'>
+										{{ block_form.where|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in block_form.where.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+
+							<div id="how_control_group" class='form-group {% if block_form.how.errors%} error{%endif%}'>
+									<label for="id_how" class="control-label value-label">{% trans "How" %}</label>
+									<div class='controls'>
+										{{ block_form.how|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in block_form.how.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+							<div id="what_control_group" class='form-group {% if block_form.what.errors%} error{%endif%}'>
+									<label for="id_what" class="control-label value-label">{% trans "What" %}</label>
+									<div class='controls'>
+										{{ block_form.what|add_css_class:'form-control' }}
+										<span class='help-block'>{% for error in block_form.what.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+					        <div id="comment_control_group" class='form-group {% if block_form.comment.errors%} error{%endif%}'>
+									<label for="id_comment" class="control-label value-label">{% trans "Comment" %}</label>
+									<div class='controls'>
+										{% rich_edit block_form.comment %}
+										<span class='help-block'>{% for error in block_form.comment.errors %}{{ error }}{% endfor %}</span>
+									</div>
+							</div>
+			  	</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" type="button">{% trans "Cancel" %}</button>
+					<button class="btn btn-primary" id='submit-block' type="submit">{% trans "Add block" %}</button>
+			  </div>
+		  </form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(function() {$('#id_comment').markdown()});
+</script>

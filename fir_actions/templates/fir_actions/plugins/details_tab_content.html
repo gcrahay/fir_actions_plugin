@@ -1,0 +1,14 @@
+{% load i18n %}
+
+
+<div class='tab-pane' id='tab_actions'>
+	<div id='fir_actions_tab_main' class='load-async' data-fetch-url="{% url 'actions:actions_list' event_id=event.id %}" data-widget="tab_actions_title">
+		{% trans "Loading ..." %}
+	</div>
+</div>
+
+<div class='tab-pane' id='tab_blocks'>
+	<div id='fir_actions_tab_blocks_main' class='load-async' data-fetch-url="{% url 'actions:blocks_list' event_id=event.id %}" data-widget="tab_blocks_title">
+		{% trans "Loading ..." %}
+	</div>
+</div>

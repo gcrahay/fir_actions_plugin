@@ -1,0 +1,11 @@
+{% load i18n %}
+<li>
+	<a href="#" id='add-action' data-url="{% url 'actions:actions_add' event.id %}">
+		<i class="glyphicon glyphicon-list"></i>{% trans "Action" %}
+	</a>
+</li>
+<li>
+	<a href="#" id='add-block' data-url="{% url 'actions:blocks_add' event.id %}">
+		<i class="glyphicon glyphicon-remove"></i>{% trans "Block"  context "noun" %}
+	</a>
+</li>

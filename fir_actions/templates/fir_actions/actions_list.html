@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load markdown %}
+<table class='table table-hover table-condensed table-action' id="actions_table{{element}}">
+    <thead>
+        <tr>
+            <th>{%  trans "Date" %}</th>
+            <th>{%  trans "Type" %}</th>
+            <th>{%  trans "Subject" %}</th>
+            <th>{%  trans "Business line" %}</th>
+            <th>{%  trans "Status" %}</th>
+            <th>{%  trans "State" %}</th>
+            {% if not event %}
+            <th>{%  trans "ID" %}</th>
+            {% endif %}
+            <th></th>
+         </tr>
+    </thead>
+    <tbody>
+{% trans "None" context "business line" as bl_none %}
+{% for a in actions %}
+		<tr id='action_{{a.id}}'>
+            <td class=''><span>{{a.opened_on|date:'Y-m-d'}}</span></td>
+		    <td class=''><span>{{a.get_type_display}}</span></td>
+			<td class='' >{{a.subject|markdown}}</td>
+			<td class=''>{{a.business_line|default_if_none:bl_none}}</td>
+            <td class=''>{{a.status}}</td>
+            <td class=''>{{a.get_state_display}}</td>
+            {% if not event %}
+            <td><a href="{% url 'incidents:details' incident_id=a.incident.id %}">#{{ a.incident.id }}</a></td>
+            {% endif %}
+            <td>
+                <a data-url="{% url 'actions:actions_display' a.id %}" href="#"  class="action-async" title="{% trans 'Details' %}"><span class='glyphicon glyphicon-edit'></span></a>&nbsp;
+                {% if not a.auto_state %}
+                {% for t in a.get_available_state_transitions %}
+                  <a  href="#" data-url="{% url 'actions:actions_transition' a.id t.name %}" title="{{t.custom.verbose}}" class="action-async">
+                      {% if t.target == 'assigned' %}
+                        <span class='glyphicon glyphicon-home'></span>
+                      {% elif t.target == 'closed' %}
+                        <span class='glyphicon glyphicon-ok-sign'></span>
+                      {% elif t.target == 'blocked' %}
+                        <span class='glyphicon glyphicon-ban-circle'></span>
+                      {% endif %}
+                  </a>&nbsp;
+                {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% if is_paginated %}
+    <div class="pagination-widget">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href='#' class='paginate' data-page='{{ page_obj.previous_page_number }}'>
+                    <i class='glyphicon glyphicon-backward'></i> {% trans "previous" %}
+                </a>
+            {% endif %}
+
+            <span class="current">
+                {% blocktrans with number=page_obj.number num_pages=page_obj.paginator.num_pages %}(page {{ number }} of {{ num_pages }}){% endblocktrans %}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href='#' class='paginate' data-page='{{ page_obj.next_page_number }}'>
+                    {% trans "next" %} <i class='glyphicon glyphicon-forward'></i>
+                </a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+<script type="text/javascript">
+    $(function() {
+        update_async_actions('#actions_table{{element}}');
+        $('.pagination-widget').on('click', 'a.paginate', function(event) {
+            var page = $(this).data('page') || 1;
+            var container = $(this).closest('.load-async');
+            var url = container.data('fetch-url');
+            $.get(url, { 'page': page }, function (data) {
+                container.html(data);
+            });
+        });
+    });
+</script>

@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<div class='widget hidden' id='fir_actions_main'>
+	<h4 class='widget'>{% trans "Open actions" %}</h4>
+
+	<div id='fir_actions_details_main' class='load-async' data-fetch-url="{% url 'actions:actions_list' event_id=event.id %}?status=active" data-widget="fir_actions_main">
+		{% trans "Loading ..." %}
+	</div>
+</div>

@@ -1,0 +1,11 @@
+{% load i18n %}
+{% block content %}
+{% if perms.fir_actions %}
+		<h3>{% trans "Blocks" %}</h3>
+	{% if correlations.blocks.objects %}
+		{% include 'fir_actions/blocks_list.html' with blocks=correlations.blocks.objects %}
+	{% else %}
+	<p>{% trans "No block found." %}</p>
+	{% endif %}
+{% endif %}
+{% endblock %}

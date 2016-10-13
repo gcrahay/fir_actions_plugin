@@ -1,0 +1,1 @@
+default_app_config = 'fir_actions.apps.ActionsConfig'

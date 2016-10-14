@@ -29,7 +29,7 @@
             <td><a href="{% url 'incidents:details' incident_id=a.incident.id %}">#{{ a.incident.id }}</a></td>
             {% endif %}
             <td>
-                <a data-url="{% url 'actions:actions_display' a.id %}" href="#"  class="action-async" title="{% trans 'Details' %}"><span class='glyphicon glyphicon-edit'></span></a>&nbsp;
+                <a data-url="{% url 'actions:actions_display' a.id %}" href="#"  class="action-async" title="{% trans 'Details' %}"><span class='glyphicon glyphicon-list'></span></a>&nbsp;
                 {% if not a.auto_state %}
                 {% for t in a.get_available_state_transitions %}
                   <a  href="#" data-url="{% url 'actions:actions_transition' a.id t.name %}" title="{{t.custom.verbose}}" class="action-async">

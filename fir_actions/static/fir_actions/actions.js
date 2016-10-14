@@ -48,8 +48,10 @@ function modal_action(data) {
 	$("#action_modals").empty();
 	$("#action_modals").html(data);
 	$("#action_modals .modal").modal('show');
+	$("#action_modals").off('click', 'button[type=submit]');
 	$("#action_modals .modal .form-control").first().focus();
 	$("#action_modals").on('click', 'button[type=submit]', function(e) {
+		e.stopPropagation();
 		e.preventDefault();
 		var form = $(this).parents('form:first');
 		var data = form.serialize();

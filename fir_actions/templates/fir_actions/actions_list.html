@@ -34,7 +34,7 @@
                 {% for t in a.get_available_state_transitions %}
                   <a  href="#" data-url="{% url 'actions:actions_transition' a.id t.name %}" title="{{t.custom.verbose}}" class="action-async">
                       {% if t.target == 'assigned' %}
-                        <span class='glyphicon glyphicon-home'></span>
+                        <span class='glyphicon glyphicon-save'></span>
                       {% elif t.target == 'closed' %}
                         <span class='glyphicon glyphicon-ok-sign'></span>
                       {% elif t.target == 'blocked' %}

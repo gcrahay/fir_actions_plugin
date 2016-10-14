@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fir_actions 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-13 13:57+0200\n"
+"POT-Creation-Date: 2016-10-14 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,10 @@ msgstr "partie prenante"
 #: fir_actions/models.py:86 fir_actions/models.py:281
 msgid "state"
 msgstr "état"
+
+#: fir_actions/models.py:87
+msgid "auto state"
+msgstr "état auto"
 
 #: fir_actions/models.py:90 fir_actions/models.py:112
 msgid "action"
@@ -220,7 +224,6 @@ msgid "block location"
 msgstr "localisation de blocage"
 
 #: fir_actions/models.py:265
-
 msgid "block locations"
 msgstr "localisations de blocage"
 
@@ -362,25 +365,25 @@ msgstr "État"
 msgid "ID"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_list.html:19
+#: fir_actions/templates/fir_actions/actions_list.html:21
 msgctxt "business line"
 msgid "None"
 msgstr "Aucune"
 
-#: fir_actions/templates/fir_actions/actions_list.html:32
+#: fir_actions/templates/fir_actions/actions_list.html:35
 msgid "Details"
 msgstr "Détails"
 
-#: fir_actions/templates/fir_actions/actions_list.html:56
+#: fir_actions/templates/fir_actions/actions_list.html:60
 msgid "previous"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_list.html:61
+#: fir_actions/templates/fir_actions/actions_list.html:65
 #, python-format
 msgid "(page %(number)s of %(num_pages)s)"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_list.html:66
+#: fir_actions/templates/fir_actions/actions_list.html:70
 msgid "next"
 msgstr ""
 
@@ -448,5 +451,10 @@ msgid "Block"
 msgstr "Blocage"
 
 #: fir_actions/templates/fir_actions/plugins/details_main.html:4
+#: fir_actions/templates/fir_actions/plugins/followup_main.html:3
 msgid "Open actions"
 msgstr "Actions ouvertes"
+
+#: fir_actions/templates/fir_actions/plugins/followup_main.html:7
+msgid "Active blocks"
+msgstr "Blocages actifs"

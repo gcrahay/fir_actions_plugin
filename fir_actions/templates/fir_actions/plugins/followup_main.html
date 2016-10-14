@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<h2 id="actions-title" class="hidden">{% trans "Open actions" %}</h2>
+<div id='fir_actions' class='load-async' data-fetch-url="{% url 'actions:actions_list' event_id=incident.id %}?status=active&followup=1" data-widget="actions-title">
+</div>
+
+<h2 id="blocks-title" class="hidden">{% trans "Active blocks" %}</h2>
+<div id='fir_blocks' class='load-async' data-fetch-url="{% url 'actions:blocks_list' event_id=incident.id %}?status=active&followup=1" data-widget="blocks-title">
+</div>

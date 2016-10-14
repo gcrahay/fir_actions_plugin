@@ -100,6 +100,14 @@ class BlockList(ListView):
             self.event = False
         self.where = None
         self.how = None
+        self.status = self.request.GET.get('status', None)
+        self.followup = self.request.GET.get('followup', 0)
+        if not self.followup == 0:
+            self.paginate_by = None
+        if self.status == 'active':
+            query &= Q(state__in=['enforced', 'deletion_proposed', 'deletion_approved'])
+        elif self.status == 'inactive':
+            query &= Q(state__in=['proposed', 'approved', 'refused', 'blocked', 'deleted'])
         if self.request.method == 'POST':
             self.where = self.request.POST.get('where', None)
             self.how = self.request.POST.get('how', None)
@@ -118,6 +126,7 @@ class BlockList(ListView):
         context = super(BlockList, self).get_context_data(**kwargs)
         context['form'] = FilterBlockForm({'where': self.where, 'how': self.how})
         context['event_id'] = self.event
+        context['followup'] = True if not self.followup == 0 else False
         return context
 
     def post(self, request, *args, **kwargs):
@@ -208,6 +217,9 @@ class ActionList(ListView):
         if self.event:
             query &= Q(incident_id=self.event)
         self.status = self.request.GET.get('status', None)
+        self.followup = self.request.GET.get('followup', 0)
+        if not self.followup == 0:
+            self.paginate_by = None
         if self.status == 'active':
             query &= Q(state__in=['created', 'assigned', 'blocked'])
         elif self.status == 'inactive':
@@ -218,6 +230,7 @@ class ActionList(ListView):
         context = super(ActionList, self).get_context_data(**kwargs)
         context['element'] = 'main' if self.status == 'active' else 'tab'
         context['event'] = self.event
+        context['followup'] = True if not self.followup == 0 else False
         return context
 
     def post(self, request, *args, **kwargs):

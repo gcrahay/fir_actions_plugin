@@ -8,7 +8,9 @@
             <th>{%  trans "What" %}</th>
             <th>{%  trans "Status" %}</th>
             <th>{%  trans "State" %}</th>
+            {% if not followup %}
             <th></th>
+            {% endif %}
          </tr>
     </thead>
     <tbody>
@@ -19,6 +21,7 @@
 			<td class=''>{{b.what}}</td>
             <td class=''>{{b.status}}</td>
             <td class=''>{{b.get_state_display}}</td>
+            {% if not followup %}
             <td>
                 {% for t in b.get_available_state_transitions %}
                   <a  href="{%if event_id%}{% url 'actions:blocks_transition' b.id t.name event_id %}{%else%}{% url 'actions:blocks_transition' b.id t.name %}{%endif%}" title="{{t.custom.verbose}}">
@@ -42,6 +45,7 @@
                   </a>&nbsp;
                 {% endfor %}
             </td>
+            {% endif %}
         </tr>
         {%if b.comment%}
         <tr class="collapse" id="comment_{{b.id}}"><td colspan="6">{{b.comment|markdown}}</td></tr>

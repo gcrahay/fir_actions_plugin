@@ -12,7 +12,9 @@
             {% if not event %}
             <th>{%  trans "ID" %}</th>
             {% endif %}
+            {% if not followup %}
             <th></th>
+            {% endif %}
          </tr>
     </thead>
     <tbody>
@@ -28,6 +30,7 @@
             {% if not event %}
             <td><a href="{% url 'incidents:details' incident_id=a.incident.id %}">#{{ a.incident.id }}</a></td>
             {% endif %}
+            {% if not followup %}
             <td>
                 <a data-url="{% url 'actions:actions_display' a.id %}" href="#"  class="action-async" title="{% trans 'Details' %}"><span class='glyphicon glyphicon-list'></span></a>&nbsp;
                 {% if not a.auto_state %}
@@ -44,6 +47,7 @@
                 {% endfor %}
                 {% endif %}
             </td>
+            {% endif %}
         </tr>
 {% endfor %}
     </tbody>

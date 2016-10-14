@@ -20,8 +20,8 @@ Follow the generic plugin installation instructions in [the FIR wiki](https://gi
 You should install it in the FIR _virtualenv_. 
 
 ```bash
-(your_env)$ git clone https://github.com/gcrahay/fir_articles_plugin.git
-(your_env)$ cd fir_articles_plugin
+(your_env)$ git clone https://github.com/gcrahay/fir_actions_plugin.git
+(your_env)$ cd fir_actions_plugin
 (your_env)$ python setup.py install
 
 ```
@@ -52,6 +52,6 @@ In the incident details view, you can add actions and blocks.
 
 ## User permissions
 
-`fir_actions.can_approve_block`: User can approve a countermeasure.
-`fir_actions.can_enforce_block`: User can enforce a countermeasure.
+* `fir_actions.can_approve_block`: User can approve a countermeasure.
+* `fir_actions.can_enforce_block`: User can enforce a countermeasure.
 

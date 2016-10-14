@@ -2,14 +2,14 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.http import JsonResponse, Http404
 from django.utils.decorators import method_decorator
 from django_fsm import has_transition_perm, can_proceed
 from django.views.generic import ListView
+from django.utils.translation import ugettext_lazy as _
 
-from incidents import views as incidents_views
 from incidents.authorization.decorator import authorization_required
 from incidents.models import Incident
 from fir_actions.forms import MultipleBlockForm, FilterBlockForm, ActionForm, ActionTransitionForm
@@ -173,11 +173,15 @@ def actions_get(request, action_id):
 @login_required
 def actions_transition(request, action_id, transition_name):
     action = get_object_or_404(Action, pk=action_id)
+    try:
+        method = getattr(action, transition_name)
+    except AttributeError:
+        raise Http404
+    try:
+        verb = method._django_fsm.transitions.popitem()[1].custom['verbose']
+    except:
+        verb = _('Change')
     if request.method == "POST":
-        try:
-            method = getattr(action, transition_name)
-        except AttributeError:
-            raise Http404
         form = ActionTransitionForm(request.POST, action=action, user=request.user)
 
         if form.is_valid():
@@ -186,18 +190,19 @@ def actions_transition(request, action_id, transition_name):
                     method(by=request.user, **form.cleaned_data)
                     action.save()
                     action.done_updating()
-            except TypeError as ex:
+            except TypeError:
                 raise Http404
             ret = {'status': 'success'}
             return JsonResponse(ret)
         else:
             errors = render_to_string("fir_actions/actions_transition_form.html",
-                                      {'transition_form': form, 'transition': transition_name, 'action': action})
+                                      {'transition_form': form, 'transition': transition_name,
+                                       'action': action, 'verb': verb})
             ret = {'status': 'error', 'data': errors}
             return JsonResponse(ret)
     form = ActionTransitionForm(action=action, user=request.user)
     return render(request, "fir_actions/actions_transition_form.html",
-                  {'transition_form': form, 'transition': transition_name, 'action': action})
+                  {'transition_form': form, 'transition': transition_name, 'action': action, 'verb': verb})
 
 
 @method_decorator(login_required, name='dispatch')

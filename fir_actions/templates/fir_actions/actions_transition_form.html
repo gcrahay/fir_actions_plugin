@@ -7,7 +7,7 @@
 		<div class="modal-content">
 		  	<div class="modal-header">
 		    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 id="transitionActionLabel" class="modal-title">{% trans "Change action" %}</h4>
+				<h4 id="transitionActionLabel" class="modal-title">{{verb}} - {{action.subject}}</h4>
 		  	</div>
             <form id="action_transition_form" action="{% url 'actions:actions_transition' action_id=action.id transition_name=transition %}" method="POST">
 			  	<div class="modal-body">
@@ -48,7 +48,7 @@
 			  	</div>
 				<div class="modal-footer">
 					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" type="button">{% trans "Cancel" %}</button>
-					<button class="btn btn-primary" id='submit-action-transition' type="submit">{% trans "Change action" %}</button>
+					<button class="btn btn-primary" id='submit-action-transition' type="submit">{{verb}}</button>
 			  </div>
 		  </form>
 		</div>

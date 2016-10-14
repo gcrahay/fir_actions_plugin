@@ -212,7 +212,7 @@ class ActionList(ListView):
             query &= Q(state__in=['created', 'assigned', 'blocked'])
         elif self.status == 'inactive':
             query &= Q(state='closed')
-        return queryset.filter(query)
+        return queryset.filter(query).order_by('-opened_on')
 
     def get_context_data(self, **kwargs):
         context = super(ActionList, self).get_context_data(**kwargs)

@@ -168,7 +168,7 @@ class ActionComment(models.Model):
     opened_by = models.ForeignKey(User)
 
 
-@receiver(post_transition, sender=Action)
+@receiver(post_transition, sender=Action, dispatch_uid="action_post_transition_comment")
 def action_post_transition(sender, instance, name=None, source=None, target=None, **kwargs):
     if isinstance(instance, sender):
         comment = _('%(user)s changed state to %(state)s' % {

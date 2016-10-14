@@ -178,12 +178,11 @@ def actions_transition(request, action_id, transition_name):
     except AttributeError:
         raise Http404
     try:
-        verb = method._django_fsm.transitions.popitem()[1].custom['verbose']
+        verb = method._django_fsm.transitions.items()[0][1].custom['verbose']
     except:
         verb = _('Change')
     if request.method == "POST":
         form = ActionTransitionForm(request.POST, action=action, user=request.user)
-
         if form.is_valid():
             try:
                 if can_proceed(method) and has_transition_perm(method, request.user):

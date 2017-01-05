@@ -48,7 +48,7 @@ In the incident details view, you can add actions and blocks.
 
 # Configuration
 
---
+In the Django addmin site, you have to add block types and locations. Block types are the countermeasure action (Deny IP) and location are where the countermeasure is enforced (Internet firewall).
 
 ## User permissions
 

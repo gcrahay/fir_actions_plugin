@@ -1,3 +1,21 @@
 .table-action p {
     margin-bottom: 0px;
 }
+
+dl {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+dd {
+    font-weight: normal;
+    line-height: 1.6;
+}
+
+#displayAction table td {
+    font-weight: normal;
+}
+
+#displayBlock table td {
+    font-weight: normal;
+}

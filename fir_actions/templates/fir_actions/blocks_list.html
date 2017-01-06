@@ -1,13 +1,16 @@
 {% load i18n %}
+{% load fir_plugins %}
 {% load markdown %}
-<table class='table table-hover table-condensed'>
+<table class='table table-hover table-condensed' id="blocks_table">
     <thead>
         <tr>
+            <th>{%  trans "ID" %}</th>
             <th>{%  trans "Where" %}</th>
             <th>{%  trans "How" %}</th>
             <th>{%  trans "What" %}</th>
             <th>{%  trans "Status" %}</th>
             <th>{%  trans "State" %}</th>
+            <th>{%  trans "Events" %}</th>
             {% if not followup %}
             <th></th>
             {% endif %}
@@ -15,14 +18,26 @@
     </thead>
     <tbody>
 {% for b in blocks %}
-		<tr id='block_{{b.id}}' {%if b.comment%}data-toggle="collapse" data-target="#comment_{{b.id}}"{%endif%}>
+		<tr id='block_{{b.id}}'>
+            <td class=''>{{b|object_id}}</td>
 		    <td class=''><span>{{b.where}}</span></td>
 			<td class=''>{{b.how}}</td>
 			<td class=''>{{b.what}}</td>
             <td class=''>{{b.status}}</td>
             <td class=''>{{b.get_state_display}}</td>
+            <td class=''>
+                {% for event in b.incidents.all %}
+                {% if not followup %}
+                <a href="{% url 'incidents:details' event.id %}">{{ event|object_id }}</a>
+                {% else %}
+                    {{ event|object_id }}
+                {% endif %}
+                &nbsp;
+                {% endfor %}
+            </td>
             {% if not followup %}
             <td>
+                <a data-url="{% url 'actions:blocks_display' b.id %}" href="#"  class="action-async" title="{% trans 'Details' %}"><span class='glyphicon glyphicon-list'></span></a>&nbsp;
                 {% for t in b.get_available_state_transitions %}
                   <a  href="{%if event_id%}{% url 'actions:blocks_transition' b.id t.name event_id %}{%else%}{% url 'actions:blocks_transition' b.id t.name %}{%endif%}" title="{{t.custom.verbose}}">
                       {% if t.target == 'approved' %}
@@ -47,9 +62,11 @@
             </td>
             {% endif %}
         </tr>
-        {%if b.comment%}
-        <tr class="collapse" id="comment_{{b.id}}"><td colspan="6">{{b.comment|markdown}}</td></tr>
-        {% endif %}
 {% endfor %}
     </tbody>
 </table>
+<script type="text/javascript">
+    $(function() {
+        update_async_actions('#blocks_table');
+    });
+</script>

@@ -80,7 +80,7 @@ def blocks_transition(request, block_id, transition_name, event_id=None):
         raise Http404
     if event_id is not None:
         return redirect('incidents:details', incident_id=event_id)
-    return redirect('blocks:blocks_index')
+    return redirect('actions:blocks_index')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -131,6 +131,14 @@ class BlockList(ListView):
 
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
+
+
+@login_required
+def blocks_get(request, block_id):
+    block = get_object_or_404(Block, pk=block_id)
+    return render(request, 'fir_actions/blocks_display.html', {'block': block,
+                                                               'followup': True,
+                                                               'element': 'block_list'})
 
 
 @login_required

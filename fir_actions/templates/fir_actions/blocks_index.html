@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load add_css_class %}
-{% block custom_css %}{{form.media.css}}{% endblock%}
+{% load staticfiles %}
+{% block custom_css %}
+	{{form.media.css}}
+	<link href="{% static "fir_actions/actions.css" %}" rel="stylesheet">
+{% endblock%}
 
 {% block custom_js %}
 {{form.media.js}}
-    <script src="/static/select/select2.min.js"></script>
+	<script src="{% static 'fir_actions/actions.js' %}"></script>
+	<script src="/static/select/select2.min.js"></script>
     <script language="JavaScript">
         $(document).ready(function() {
             //$('#id_where').select2();
@@ -18,6 +23,8 @@
 {% endblock %}
 
 {% block content %}
+<div id='action_modals'>
+	</div>
 	<div class="row">
 		<form action="{% url 'actions:blocks_index' %}" method='post' id='search'>
 			<div class='form-group col-md-4'>

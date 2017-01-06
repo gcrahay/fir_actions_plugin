@@ -21,7 +21,6 @@ $(function() {
 });
 
 function ajax_action(elt, callback) {
-
 	$.ajax({
 		url: elt.data('url'),
 		headers: {'X-CSRFToken': getCookie('csrftoken')},

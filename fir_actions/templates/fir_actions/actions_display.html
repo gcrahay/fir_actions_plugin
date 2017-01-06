@@ -1,6 +1,7 @@
 {% load add_css_class %}
 {% load i18n %}
 {% load markdown %}
+{% trans "None" context "business line" as bl_none %}
 
 <div id="displayAction" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="displayActionLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -9,15 +10,15 @@
 		    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 id="displayActionLabel" class="modal-title">{{action.subject|markdown}}</h4>
 		  	</div>
-            <table class="table ">
-                <tbody>
-                    <td><td>Date</td><td>{{ action.opened_on}}</td></tr>
-                    <td><td>Creator</td><td>{{ action.opened_by}}</td></tr>
-                    <td><td>Type</td><td>{{ action.get_type_display}}</td></tr>
-                    <td><td>State</td><td>{{ action.get_state_display}} ({{action.status}})</td></tr>
-                    <td><td>Description</td><td>{{ action.description|markdown}}</td></tr>
-                </tbody>
-            </table>
+            <div class="modal-body">
+            <dl class="dl-horizontal">
+                    <dt>{% trans "Date" %}</dt><dd>{{ action.opened_on}}</dd>
+                    <dt>{% trans "Creator" %}</dt><dd>{{ action.opened_by}}</dd>
+                    <dt>{% trans "Type" %}</dt><dd>{{ action.get_type_display}}</dd>
+                    <dt>{% trans "State" %}</dt><dd>{{ action.get_state_display}} ({{action.status}})</dd>
+                    <dt>{% trans "Business line" %}</dt><dd>{{action.business_line|default_if_none:bl_none}}</dd>
+                    <dt>{% trans "Description" %}</dt><dd>{{ action.description|markdown}}</dd>
+            </dl>
             {% for c in action.comments.all reversed %}
             {% if forloop.first %}
                 <table class='table table-hover table-condensed'>
@@ -37,6 +38,7 @@
                 </table>
             {% endif %}
         {% endfor %}
+            </div>
 				<div class="modal-footer">
 					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" type="button">{% trans "Close" %}</button>
 			  </div>

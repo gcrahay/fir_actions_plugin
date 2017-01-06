@@ -9,8 +9,6 @@ This plugins allows you to assign actions to FIR business lines and manage count
 
 # Installation
 
-!! `fir_actions` needs FIR pull requests certsocietegenerale/FIR#127 and certsocietegenerale/FIR#131 .
-
 ## Overview
 
 Follow the generic plugin installation instructions in [the FIR wiki](https://github.com/certsocietegenerale/FIR/wiki/Plugins).
@@ -32,6 +30,12 @@ In *$FIR_HOME/fir/config/installed_app.txt*, add:
 django_fsm
 selectable
 fir_actions
+```
+
+In *$FIR_HOME/fir/urls.py*, add to the `urlpatterns` list:
+
+```python
+url(r'^selectable/', include('selectable.urls')),
 ```
 
 In your *$FIR_HOME*, launch:

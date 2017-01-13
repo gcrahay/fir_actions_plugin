@@ -5,37 +5,6 @@
 {% block custom_js %}{{block_form.media.js}}{% endblock%}
 {{block_form.media.css}}
 {{block_form.media.js}}
-<script type="text/javascript">
-	$.ui.djselectable.prototype._comboButtonTemplate = function (input) {
-        var icon = $("<i>").addClass("glyphicon glyphicon-plus");
-        // Remove current classes on the text input
-        $(input).attr("class", "");
-        // Wrap with input-append
-        $(input).wrap('<div class="input-append" />');
-        // Return button link with the chosen icon
-        return $("<a>").append(icon).addClass("btn btn-small");
-    };
-    $(document).ready(function() {
-		$.ui.djselectable.prototype._comboButtonTemplate = function (input) {
-        var icon = $("<i>").addClass("glyphicon glyphicon-plus");
-        // Remove current classes on the text input
-        $(input).attr("class", "");
-        // Wrap with input-append
-        $(input).wrap('<div class="input-append" />');
-        // Return button link with the chosen icon
-        return $("<a>").append(icon).addClass("btn btn-small");
-    };
-    $.ui.djselectable.prototype._removeButtonTemplate = function (item) {
-        var icon = $("<i>").addClass("icon-remove-sign");
-        // Return button link with the chosen icon
-        return $("<a>").append(icon).addClass("btn btn-small pull-right");
-    };
-        function newParameters(query) {
-            query.location = $('#id_where').val();
-        }
-        $('#id_how_0').djselectable('option', 'prepareQuery', newParameters);
-    });
-</script>
 
 <div id="addBlock" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addBlockLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">

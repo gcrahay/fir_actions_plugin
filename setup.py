@@ -24,7 +24,7 @@ setup(
     install_requires=[
         'django>=1.9',
         'django-fsm',
-        'django-selectable'
+        'django-autocomplete-light'
     ],
     license="GPL v3, see LICENSE",
     zip_safe=False,

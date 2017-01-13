@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from dal import autocomplete
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
@@ -13,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from incidents.authorization.decorator import authorization_required
 from incidents.models import Incident
 from fir_actions.forms import MultipleBlockForm, FilterBlockForm, ActionForm, ActionTransitionForm
-from fir_actions.models import Block, Action, BlockLocation
+from fir_actions.models import Block, Action, BlockLocation, BlockType
 
 
 @login_required
@@ -150,12 +151,14 @@ def actions_addaction(request, event_id, authorization_target=None):
         e = authorization_target
 
     if request.method == "POST":
-        form = ActionForm(request.POST)
+        form = ActionForm(request.POST, user=request.user, incident=e)
 
         if form.is_valid():
             action = form.save(commit=False)
             action.incident = e
             action.opened_by = request.user
+            action.save()
+            action.assign(by=request.user)
             action.save()
             action.done_creating()
             ret = {'status': 'success'}
@@ -165,7 +168,7 @@ def actions_addaction(request, event_id, authorization_target=None):
                                       {'action_form': form, 'event_id': '' if event_id is None else event_id})
             ret = {'status': 'error', 'data': errors}
             return JsonResponse(ret)
-    form = ActionForm()
+    form = ActionForm(user=request.user, incident=e)
     return render(request, "fir_actions/actions_form.html",
                   {'action_form': form, 'event_id': '' if event_id is None else event_id})
 
@@ -173,7 +176,7 @@ def actions_addaction(request, event_id, authorization_target=None):
 @login_required
 def actions_get(request, action_id):
     action = get_object_or_404(Action, pk=action_id)
-    if not request.user.has_perm('incidents.handle_incidents', obj=action.incident):
+    if not request.user.has_perm('incidents.view_incidents', obj=action.incident):
         raise PermissionDenied
     return render(request, 'fir_actions/actions_display.html', {'action': action})
 
@@ -220,7 +223,8 @@ class ActionList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = Action.authorization.for_user(self.request.user, 'incidents.view_events')
+        queryset = Action.authorization.for_user(self.request.user, 'incidents.view_incidents').distinct() \
+                   | Action.objects.filter(business_line=None).distinct()
         query = Q()
         try:
             self.event = int(self.kwargs.get('event_id'))
@@ -248,3 +252,14 @@ class ActionList(ListView):
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
 
+
+class BlockTypeAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        location = self.forwarded.get('where', None)
+        if not location:
+            return BlockType.objects.none()
+        try:
+            location = BlockLocation.authorization.for_user(self.request.user).get(id=int(location))
+            return location.types.filter(name__icontains= self.q)
+        except (BlockLocation.DoesNotExist, BlockLocation.MultipleObjectsReturned, ValueError):
+            return BlockType.objects.none()

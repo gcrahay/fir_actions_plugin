@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fir_actions 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 10:07+0200\n"
+"POT-Creation-Date: 2017-01-16 19:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,443 +18,475 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: fir_actions/forms.py:30
+#: forms.py:29
 msgid "Enter one item per line"
 msgstr "Ajouter un élément par ligne"
 
-#: fir_actions/forms.py:45
+#: forms.py:44
 #, python-format
 msgid "%(type)s is not a type of %(location)s"
 msgstr "%(type)s n'est pas un type de %(location)s"
 
-#: fir_actions/models.py:25
+#: models.py:25
 msgid "Investigation"
 msgstr "Investigation"
 
-#: fir_actions/models.py:26
+#: models.py:26
 msgid "Alerting"
 msgstr "Alerte"
 
-#: fir_actions/models.py:27
+#: models.py:27
 msgid "Countermeasure"
 msgstr "Contre-mesure"
 
-#: fir_actions/models.py:28
+#: models.py:28
 msgid "Other"
 msgstr "Autre"
 
-#: fir_actions/models.py:32
+#: models.py:32
 msgid "Created"
 msgstr "Créé"
 
-#: fir_actions/models.py:33
+#: models.py:33
 msgid "Assigned"
 msgstr "Assigné"
 
-#: fir_actions/models.py:34 fir_actions/models.py:234
+#: models.py:34 models.py:233
 msgid "Blocked"
 msgstr "Bloqué"
 
-#: fir_actions/models.py:35
+#: models.py:35
 msgid "Closed"
 msgstr "Fermé"
 
-#: fir_actions/models.py:77
+#: models.py:77
 msgid "creation date"
 msgstr "date de création"
 
-#: fir_actions/models.py:78
+#: models.py:78
 msgid "creator"
 msgstr "créateur"
 
-#: fir_actions/models.py:80
+#: models.py:80
 msgid "incident"
 msgstr "incident"
 
-#: fir_actions/models.py:81 fir_actions/models.py:191
+#: models.py:81 models.py:190
 msgid "type"
 msgstr "type"
 
-#: fir_actions/models.py:82 fir_actions/models.py:192
+#: models.py:82 models.py:191
 msgid "subject"
 msgstr "objet"
 
-#: fir_actions/models.py:83 fir_actions/models.py:194
+#: models.py:83 models.py:193
 msgid "description"
 msgstr ""
 
-#: fir_actions/models.py:85 fir_actions/models.py:197 fir_actions/models.py:258
+#: models.py:85 models.py:196 models.py:257
 msgid "business line"
 msgstr "partie prenante"
 
-#: fir_actions/models.py:86 fir_actions/models.py:281
+#: models.py:86 models.py:280
 msgid "state"
 msgstr "état"
 
-#: fir_actions/models.py:87
+#: models.py:87
 msgid "auto state"
 msgstr "état auto"
 
-#: fir_actions/models.py:90 fir_actions/models.py:112
+#: models.py:90 models.py:112
 msgid "action"
 msgstr "action"
 
-#: fir_actions/models.py:104 fir_actions/models.py:301
+#: models.py:104 models.py:300
 msgid "Active"
 msgstr "Actif"
 
-#: fir_actions/models.py:105 fir_actions/models.py:302
+#: models.py:105 models.py:301
 msgid "Inactive"
 msgstr "Inactif"
 
-#: fir_actions/models.py:116
+#: models.py:115
 msgid "Assign"
 msgstr "Assigner"
 
-#: fir_actions/models.py:133 fir_actions/models.py:343
+#: models.py:132 models.py:342
 msgid "Report block"
 msgstr "Signaler un blocage"
 
-#: fir_actions/models.py:141 fir_actions/models.py:353
+#: models.py:140 models.py:352
 msgid "Unblock"
 msgstr "Débloquer"
 
-#: fir_actions/models.py:149
-#: fir_actions/templates/fir_actions/actions_display.html:41
+#: models.py:148 templates/fir_actions/actions_display.html:43
+#: templates/fir_actions/blocks_display.html:34
 msgid "Close"
 msgstr "Fermer"
 
-#: fir_actions/models.py:157
+#: models.py:156
 msgid "Force close"
 msgstr "Forcer la fermeture"
 
-#: fir_actions/models.py:174
+#: models.py:173
 #, python-format
 msgid "%(user)s changed state to %(state)s"
 msgstr "%(user)s a changé l'état vers %(state)s"
 
-#: fir_actions/models.py:178
+#: models.py:177
 #, python-format
 msgid "%(user)s assigned this action to %(business_line)s"
 msgstr "%(user)s a assigné cette action à %(business_line)s"
 
-#: fir_actions/models.py:193 fir_actions/models.py:195
+#: models.py:192 models.py:194
 msgid "You can use Django template language here."
 msgstr "Vous pouvez utiliser le langage de template de Django."
 
-#: fir_actions/models.py:206
+#: models.py:205
 msgid "action template"
 msgstr "gabarit d'actions"
 
-#: fir_actions/models.py:207
+#: models.py:206
 msgid "action templates"
 msgstr "gabarits d'actions"
 
-#: fir_actions/models.py:212 fir_actions/models.py:243
-#: fir_actions/models.py:256
+#: models.py:211 models.py:242 models.py:255
 msgid "name"
 msgstr "nom"
 
-#: fir_actions/models.py:213
+#: models.py:212
 msgid "category"
 msgstr "catégorie"
 
-#: fir_actions/models.py:214
+#: models.py:213
 msgid "business lines"
 msgstr "partie prenante"
 
-#: fir_actions/models.py:216
+#: models.py:215
 msgid "detection"
 msgstr "détection"
 
-#: fir_actions/models.py:218
+#: models.py:217
 msgid "plan"
 msgstr ""
 
-#: fir_actions/models.py:219 fir_actions/models.py:287
+#: models.py:218 models.py:286
 msgid "actions"
 msgstr "actions"
 
-#: fir_actions/models.py:225 fir_actions/models.py:226
+#: models.py:224 models.py:225
 msgid "action template list"
 msgstr "liste des gabarits d'actions"
 
-#: fir_actions/models.py:230
+#: models.py:229
 msgid "Proposed"
 msgstr "Proposé"
 
-#: fir_actions/models.py:231
+#: models.py:230
 msgid "Approved"
 msgstr "Approuvé"
 
-#: fir_actions/models.py:232
+#: models.py:231
 msgid "Refused"
 msgstr "Refusé"
 
-#: fir_actions/models.py:233
+#: models.py:232
 msgid "Enforced"
 msgstr "Appliqué"
 
-#: fir_actions/models.py:235
+#: models.py:234
 msgid "Deletion proposed"
 msgstr "Suppression proposée"
 
-#: fir_actions/models.py:236
+#: models.py:235
 msgid "Deletion approved"
 msgstr "Suppression approuvée"
 
-#: fir_actions/models.py:237
+#: models.py:236
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: fir_actions/models.py:249
+#: models.py:248
 msgid "block type"
 msgstr "type de blocage"
 
-#: fir_actions/models.py:250
+#: models.py:249
 msgid "block types"
 msgstr "types de blocage"
 
-#: fir_actions/models.py:257
+#: models.py:256
 msgid "types"
 msgstr "types"
 
-#: fir_actions/models.py:264
+#: models.py:263
 msgid "block location"
 msgstr "localisation de blocage"
 
-#: fir_actions/models.py:265
+#: models.py:264
 msgid "block locations"
 msgstr "localisations de blocage"
 
-#: fir_actions/models.py:278
+#: models.py:277
 msgid "where"
 msgstr "où"
 
-#: fir_actions/models.py:279
+#: models.py:278
 msgid "how"
 msgstr "comment"
 
-#: fir_actions/models.py:280
+#: models.py:279
 msgid "what"
 msgstr "quoi"
 
-#: fir_actions/models.py:282
+#: models.py:281
 msgid "comment"
 msgstr "commentaire"
 
-#: fir_actions/models.py:284
+#: models.py:283
 msgid "incidents"
 msgstr "incidents"
 
-#: fir_actions/models.py:306
+#: models.py:305
 msgid "Approve"
 msgstr "Approuver"
 
-#: fir_actions/models.py:313
+#: models.py:312
 #, python-format
 msgid "Enforce block B#%(block_id)s on %(block_location)s"
 msgstr "Appliquer le blocage B#%(block_id)s sur %(block_location)s"
 
-#: fir_actions/models.py:322
+#: models.py:321
 msgid "Refuse"
 msgstr "Refuser"
 
-#: fir_actions/models.py:328
+#: models.py:327
 #, python-format
 msgid "Block B#%(block_id)s refused."
 msgstr "Blocage B#%(block_id)s refusé."
 
-#: fir_actions/models.py:333
+#: models.py:332
 msgid "Enforce"
 msgstr "Appliquer"
 
-#: fir_actions/models.py:339
+#: models.py:338
 #, python-format
 msgid "Block B#%(block_id)s enforced."
 msgstr "Blocage B#%(block_id)s appliqué."
 
-#: fir_actions/models.py:363
+#: models.py:362
 msgid "Propose deletion"
 msgstr "Proposer la suppression"
 
-#: fir_actions/models.py:370
+#: models.py:369
 msgid "Approve deletion"
 msgstr "Approuver la suppression"
 
-#: fir_actions/models.py:377
+#: models.py:376
 #, python-format
 msgid "Remove block B#%(block_id)s on %(block_location)s"
 msgstr "Supprimer le blocage B#%(block_id)s sur %(block_location)s"
 
-#: fir_actions/models.py:386
+#: models.py:385
 msgid "Refuse deletion"
 msgstr "Refuser la suppression"
 
-#: fir_actions/models.py:393
+#: models.py:392
 msgid "Delete"
 msgstr "Supprimer"
 
-#: fir_actions/models.py:399
+#: models.py:398
 #, python-format
 msgid "Block B#%(block_id)s removed."
 msgstr "Block B#%(block_id)s supprimé."
 
-#: fir_actions/models.py:403
+#: models.py:402
 msgid "Propose"
 msgstr "Proposer"
 
-#: fir_actions/models.py:439
+#: models.py:438
 msgid "block"
 msgstr "blocage"
 
-#: fir_actions/templates/fir_actions/actions_display.html:28
-#: fir_actions/templates/fir_actions/actions_transition_form.html:41
-#: fir_actions/templates/fir_actions/blocks_form.html:74
-msgid "Comment"
-msgstr "Commentaire"
+#: models.py:481
+msgid "Action assigned"
+msgstr "Action assignée"
 
-#: fir_actions/templates/fir_actions/actions_form.html:10
-#: fir_actions/templates/fir_actions/actions_form.html:48
-msgid "Add action"
-msgstr "Ajouter une action"
+#: models.py:489
+msgid "Action updated"
+msgstr "Action mise à jour"
 
-#: fir_actions/templates/fir_actions/actions_form.html:17
-#: fir_actions/templates/fir_actions/actions_list.html:7
-msgid "Type"
-msgstr "Type"
-
-#: fir_actions/templates/fir_actions/actions_form.html:25
-#: fir_actions/templates/fir_actions/actions_list.html:8
-#: fir_actions/templates/fir_actions/actions_transition_form.html:25
-msgid "Subject"
-msgstr "Objet"
-
-#: fir_actions/templates/fir_actions/actions_form.html:32
-#: fir_actions/templates/fir_actions/actions_transition_form.html:32
-msgid "Description"
-msgstr "Description"
-
-#: fir_actions/templates/fir_actions/actions_form.html:39
-#: fir_actions/templates/fir_actions/actions_list.html:9
-#: fir_actions/templates/fir_actions/actions_transition_form.html:18
-msgid "Business line"
-msgstr "Partie prenante"
-
-#: fir_actions/templates/fir_actions/actions_form.html:47
-#: fir_actions/templates/fir_actions/actions_transition_form.html:50
-#: fir_actions/templates/fir_actions/blocks_form.html:82
-msgid "Cancel"
-msgstr "Annuler"
-
-#: fir_actions/templates/fir_actions/actions_list.html:6
-msgid "Date"
-msgstr "Date"
-
-#: fir_actions/templates/fir_actions/actions_list.html:10
-#: fir_actions/templates/fir_actions/blocks_list.html:9
-msgid "Status"
-msgstr "Statut"
-
-#: fir_actions/templates/fir_actions/actions_list.html:11
-#: fir_actions/templates/fir_actions/blocks_list.html:10
-msgid "State"
-msgstr "État"
-
-#: fir_actions/templates/fir_actions/actions_list.html:13
-msgid "ID"
-msgstr ""
-
-#: fir_actions/templates/fir_actions/actions_list.html:21
+#: templates/fir_actions/actions_display.html:4
+#: templates/fir_actions/actions_list.html:22
+#: templates/fir_actions/blocks_display.html:5
 msgctxt "business line"
 msgid "None"
 msgstr "Aucune"
 
-#: fir_actions/templates/fir_actions/actions_list.html:35
+#: templates/fir_actions/actions_display.html:15
+#: templates/fir_actions/actions_list.html:7
+msgid "Date"
+msgstr "Date"
+
+#: templates/fir_actions/actions_display.html:16
+msgid "Creator"
+msgstr "Créateur"
+
+#: templates/fir_actions/actions_display.html:17
+#: templates/fir_actions/actions_form.html:17
+#: templates/fir_actions/actions_list.html:8
+msgid "Type"
+msgstr "Type"
+
+#: templates/fir_actions/actions_display.html:18
+#: templates/fir_actions/actions_list.html:12
+#: templates/fir_actions/blocks_display.html:20
+#: templates/fir_actions/blocks_list.html:12
+msgid "State"
+msgstr "État"
+
+#: templates/fir_actions/actions_display.html:19
+#: templates/fir_actions/actions_form.html:39
+#: templates/fir_actions/actions_list.html:10
+#: templates/fir_actions/actions_transition_form.html:18
+msgid "Business line"
+msgstr "Partie prenante"
+
+#: templates/fir_actions/actions_display.html:20
+#: templates/fir_actions/actions_form.html:32
+#: templates/fir_actions/actions_transition_form.html:32
+msgid "Description"
+msgstr "Description"
+
+#: templates/fir_actions/actions_display.html:29
+#: templates/fir_actions/actions_transition_form.html:41
+#: templates/fir_actions/blocks_display.html:26
+#: templates/fir_actions/blocks_form.html:43
+msgid "Comment"
+msgstr "Commentaire"
+
+#: templates/fir_actions/actions_form.html:10
+#: templates/fir_actions/actions_form.html:48
+msgid "Add action"
+msgstr "Ajouter une action"
+
+#: templates/fir_actions/actions_form.html:25
+#: templates/fir_actions/actions_list.html:9
+#: templates/fir_actions/actions_transition_form.html:25
+msgid "Subject"
+msgstr "Objet"
+
+#: templates/fir_actions/actions_form.html:47
+#: templates/fir_actions/actions_transition_form.html:50
+#: templates/fir_actions/blocks_form.html:51
+msgid "Cancel"
+msgstr "Annuler"
+
+#: templates/fir_actions/actions_list.html:11
+#: templates/fir_actions/blocks_list.html:11
+msgid "Status"
+msgstr "Statut"
+
+#: templates/fir_actions/actions_list.html:14
+#: templates/fir_actions/blocks_display.html:16
+#: templates/fir_actions/blocks_list.html:7
+msgid "ID"
+msgstr ""
+
+#: templates/fir_actions/actions_list.html:36
+#: templates/fir_actions/blocks_list.html:40
 msgid "Details"
 msgstr "Détails"
 
-#: fir_actions/templates/fir_actions/actions_list.html:60
+#: templates/fir_actions/actions_list.html:61
 msgid "previous"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_list.html:65
+#: templates/fir_actions/actions_list.html:66
 #, python-format
 msgid "(page %(number)s of %(num_pages)s)"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_list.html:70
+#: templates/fir_actions/actions_list.html:71
 msgid "next"
 msgstr ""
 
-#: fir_actions/templates/fir_actions/actions_transition_form.html:10
-#: fir_actions/templates/fir_actions/actions_transition_form.html:51
-msgid "Change action"
-msgstr "Modifier l'action"
-
-#: fir_actions/templates/fir_actions/blocks_form.html:45
-#: fir_actions/templates/fir_actions/blocks_form.html:83
-msgid "Add block"
-msgstr "Ajouter un blocage"
-
-#: fir_actions/templates/fir_actions/blocks_form.html:52
-#: fir_actions/templates/fir_actions/blocks_index.html:24
-#: fir_actions/templates/fir_actions/blocks_list.html:6
-msgid "Where"
-msgstr "Où"
-
-#: fir_actions/templates/fir_actions/blocks_form.html:60
-#: fir_actions/templates/fir_actions/blocks_index.html:30
-#: fir_actions/templates/fir_actions/blocks_list.html:7
-msgid "How"
-msgstr "Comment"
-
-#: fir_actions/templates/fir_actions/blocks_form.html:67
-#: fir_actions/templates/fir_actions/blocks_list.html:8
-msgid "What"
-msgstr "Quoi"
-
-#: fir_actions/templates/fir_actions/blocks_index.html:39
-msgctxt "verb"
-msgid "Filter"
-msgstr "Filtrer"
-
-#: fir_actions/templates/fir_actions/plugins/base_navbar.html:3
-#: fir_actions/templates/fir_actions/plugins/correlation_list.html:4
-#: fir_actions/templates/fir_actions/plugins/details_tab.html:11
-msgid "Blocks"
-msgstr "Blocages"
-
-#: fir_actions/templates/fir_actions/plugins/correlation_list.html:8
-msgid "No block found."
-msgstr "Aucun blocage trouvé."
-
-#: fir_actions/templates/fir_actions/plugins/dashboard_tab.html:3
-#: fir_actions/templates/fir_actions/plugins/details_tab.html:5
-msgid "Actions"
-msgstr "Actions"
-
-#: fir_actions/templates/fir_actions/plugins/dashboard_tab_content.html:4
-#: fir_actions/templates/fir_actions/plugins/details_main.html:7
-#: fir_actions/templates/fir_actions/plugins/details_tab_content.html:6
-#: fir_actions/templates/fir_actions/plugins/details_tab_content.html:12
-msgid "Loading ..."
-msgstr "Chargement..."
-
-#: fir_actions/templates/fir_actions/plugins/details_actions_add.html:4
-msgid "Action"
-msgstr "Action"
-
-#: fir_actions/templates/fir_actions/plugins/details_actions_add.html:9
+#: templates/fir_actions/blocks_display.html:12
+#: templates/fir_actions/plugins/details_actions_add.html:9
 msgctxt "noun"
 msgid "Block"
 msgstr "Blocage"
 
-#: fir_actions/templates/fir_actions/plugins/details_main.html:4
-#: fir_actions/templates/fir_actions/plugins/followup_main.html:3
+#: templates/fir_actions/blocks_display.html:17
+#: templates/fir_actions/blocks_form.html:21
+#: templates/fir_actions/blocks_index.html:21
+#: templates/fir_actions/blocks_list.html:8
+msgid "Where"
+msgstr "Où"
+
+#: templates/fir_actions/blocks_display.html:18
+#: templates/fir_actions/blocks_form.html:29
+#: templates/fir_actions/blocks_index.html:27
+#: templates/fir_actions/blocks_list.html:9
+msgid "How"
+msgstr "Comment"
+
+#: templates/fir_actions/blocks_display.html:19
+#: templates/fir_actions/blocks_form.html:36
+#: templates/fir_actions/blocks_list.html:10
+msgid "What"
+msgstr "Quoi"
+
+#: templates/fir_actions/blocks_display.html:21
+#: templates/fir_actions/blocks_list.html:13
+msgid "Events"
+msgstr ""
+
+#: templates/fir_actions/blocks_display.html:29
+#: templates/fir_actions/plugins/dashboard_tab.html:3
+#: templates/fir_actions/plugins/details_tab.html:5
+msgid "Actions"
+msgstr "Actions"
+
+#: templates/fir_actions/blocks_form.html:14
+#: templates/fir_actions/blocks_form.html:52
+msgid "Add block"
+msgstr "Ajouter un blocage"
+
+#: templates/fir_actions/blocks_index.html:36
+msgctxt "verb"
+msgid "Filter"
+msgstr "Filtrer"
+
+#: templates/fir_actions/plugins/base_navbar.html:3
+#: templates/fir_actions/plugins/correlation_list.html:4
+#: templates/fir_actions/plugins/details_tab.html:11
+msgid "Blocks"
+msgstr "Blocages"
+
+#: templates/fir_actions/plugins/correlation_list.html:8
+msgid "No block found."
+msgstr "Aucun blocage trouvé."
+
+#: templates/fir_actions/plugins/dashboard_tab_content.html:4
+#: templates/fir_actions/plugins/details_main.html:7
+#: templates/fir_actions/plugins/details_tab_content.html:6
+#: templates/fir_actions/plugins/details_tab_content.html:12
+msgid "Loading ..."
+msgstr "Chargement..."
+
+#: templates/fir_actions/plugins/details_actions_add.html:4
+msgid "Action"
+msgstr "Action"
+
+#: templates/fir_actions/plugins/details_main.html:4
+#: templates/fir_actions/plugins/followup_main.html:3
 msgid "Open actions"
 msgstr "Actions ouvertes"
 
-#: fir_actions/templates/fir_actions/plugins/followup_main.html:7
+#: templates/fir_actions/plugins/followup_main.html:7
 msgid "Active blocks"
 msgstr "Blocages actifs"
+
+#: views.py:194
+msgid "Change"
+msgstr "Modifier"

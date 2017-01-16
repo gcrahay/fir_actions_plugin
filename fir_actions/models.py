@@ -112,8 +112,7 @@ class Action(FIRModel, models.Model):
         verbose_name = _('action')
 
     @fsm_actions
-    @transition('state', source=['created', ], target='assigned',
-                permission=action_permission('incidents.handle_incidents'), custom={'verbose': _('Assign')})
+    @transition('state', source=['created', ], target='assigned', custom={'verbose': _('Assign')})
     def assign(self, comment=None, business_line=None, subject=None, description=None, by=None):
         """ Assign the action to a business line
         :return:
@@ -255,7 +254,7 @@ class BlockType(models.Model):
 class BlockLocation(models.Model):
     name = models.CharField(max_length=69, verbose_name=_("name"))
     types = models.ManyToManyField(BlockType, related_name='locations', verbose_name=_('types'))
-    business_line = models.ForeignKey('incidents.BusinessLine', null=True, blank=True, verbose_name=_('business line'))
+    business_line = models.ForeignKey('incidents.BusinessLine', verbose_name=_('business line'))
 
     def __str__(self):
         return self.name
@@ -475,17 +474,24 @@ def refresh_block(sender, instance, **kwargs):
     instance.refresh_artifacts()
 
 try:
-    from fir_async.registry import async_event
+    from fir_notifications.decorators import notification_event
+    from django_fsm.signals import post_transition
 
-    @async_event('action:created', post_save, Action, verbose_name='Action created')
-    def action_created(sender, instance, **kwargs):
-        if kwargs.get('created', False):
-            return instance, instance.business_line, None
+
+    @notification_event('action:assigned', post_transition, Action, verbose_name=_('Action assigned'))
+    def action_assigned(sender, instance, **kwargs):
+        target = kwargs.get('target')
+        if target == 'assigned':
+            return instance, instance.business_line
         return None, None
 
 
-    @async_event('action:updated', model_updated, Action, verbose_name='Action updated')
+    @notification_event('action:updated', post_transition, Action, verbose_name=_('Action updated'))
     def action_created(sender, instance, **kwargs):
-        return instance, instance.business_line, None
+        target = kwargs.get('target')
+        if target not in ('assigned', 'created'):
+            return instance, instance.incident.concerned_business_lines.all()
+        return None, None
+
 except ImportError:
     pass

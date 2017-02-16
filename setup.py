@@ -13,7 +13,7 @@ with open('README.md') as readme_file:
 
 setup(
     name='fir_actions',
-    version='0.1.0',
+    version='0.2.0',
     description="Plugin for FIR (Fast Incident Response) to manage actions (tasks)",
     long_description=readme,
     author="Gaetan Crahay",
